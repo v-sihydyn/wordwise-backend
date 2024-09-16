@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_dynamic_meanings",
+  "info": {
+    "displayName": "Meaning",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "text"
+    }
+  }
+}
