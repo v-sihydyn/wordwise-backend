@@ -391,6 +391,40 @@ export interface ApiDemoDemo extends Schema.CollectionType {
   };
 }
 
+export interface ApiDirectoryDirectory extends Schema.CollectionType {
+  collectionName: 'directories';
+  info: {
+    singularName: 'directory';
+    pluralName: 'directories';
+    displayName: 'Directory';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String;
+    user: Attribute.Relation<
+      'api::directory.directory',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::directory.directory',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::directory.directory',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -805,6 +839,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::demo.demo'
     >;
+    directories: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::directory.directory'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -833,6 +872,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::demo.demo': ApiDemoDemo;
+      'api::directory.directory': ApiDirectoryDirectory;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
