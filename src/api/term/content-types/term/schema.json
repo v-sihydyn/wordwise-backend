@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "terms",
+  "info": {
+    "singularName": "term",
+    "pluralName": "terms",
+    "displayName": "Term",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "value": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "meanings": {
+      "type": "component",
+      "repeatable": true,
+      "component": "dynamic.meaning",
+      "required": true,
+      "min": 1
+    },
+    "examples": {
+      "type": "component",
+      "repeatable": true,
+      "component": "dynamic.meaning",
+      "required": false
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "terms"
+    },
+    "directory": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::directory.directory",
+      "inversedBy": "term"
+    }
+  }
+}

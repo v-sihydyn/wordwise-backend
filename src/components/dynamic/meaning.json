@@ -1,13 +1,15 @@
 {
   "collectionName": "components_dynamic_meanings",
   "info": {
-    "displayName": "Meaning",
+    "displayName": "Single text field",
     "description": ""
   },
   "options": {},
   "attributes": {
     "text": {
-      "type": "text"
+      "type": "text",
+      "required": true,
+      "maxLength": 100
     }
   }
 }

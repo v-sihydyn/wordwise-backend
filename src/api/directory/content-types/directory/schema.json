@@ -19,6 +19,12 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "directories"
+    },
+    "term": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::term.term",
+      "mappedBy": "directory"
     }
   }
 }

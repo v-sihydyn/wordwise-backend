@@ -408,6 +408,11 @@ export interface ApiDirectoryDirectory extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    term: Attribute.Relation<
+      'api::directory.directory',
+      'oneToOne',
+      'api::term.term'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -421,6 +426,51 @@ export interface ApiDirectoryDirectory extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTermTerm extends Schema.CollectionType {
+  collectionName: 'terms';
+  info: {
+    singularName: 'term';
+    pluralName: 'terms';
+    displayName: 'Term';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    value: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    meanings: Attribute.Component<'dynamic.meaning', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    examples: Attribute.Component<'dynamic.meaning', true>;
+    user: Attribute.Relation<
+      'api::term.term',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    directory: Attribute.Relation<
+      'api::term.term',
+      'oneToOne',
+      'api::directory.directory'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::term.term', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::term.term', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -844,6 +894,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::directory.directory'
     >;
+    terms: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::term.term'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -873,6 +928,7 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::demo.demo': ApiDemoDemo;
       'api::directory.directory': ApiDirectoryDirectory;
+      'api::term.term': ApiTermTerm;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

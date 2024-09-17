@@ -3,11 +3,15 @@ import type { Schema, Attribute } from '@strapi/strapi';
 export interface DynamicMeaning extends Schema.Component {
   collectionName: 'components_dynamic_meanings';
   info: {
-    displayName: 'Meaning';
+    displayName: 'Single text field';
     description: '';
   };
   attributes: {
-    text: Attribute.Text;
+    text: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
   };
 }
 

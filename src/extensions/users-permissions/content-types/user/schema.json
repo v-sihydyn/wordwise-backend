@@ -77,6 +77,12 @@
       "relation": "oneToMany",
       "target": "api::directory.directory",
       "mappedBy": "user"
+    },
+    "terms": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::term.term",
+      "mappedBy": "user"
     }
   }
 }
