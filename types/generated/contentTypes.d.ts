@@ -408,9 +408,9 @@ export interface ApiDirectoryDirectory extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
-    term: Attribute.Relation<
+    terms: Attribute.Relation<
       'api::directory.directory',
-      'oneToOne',
+      'oneToMany',
       'api::term.term'
     >;
     createdAt: Attribute.DateTime;
@@ -463,7 +463,7 @@ export interface ApiTermTerm extends Schema.CollectionType {
     >;
     directory: Attribute.Relation<
       'api::term.term',
-      'oneToOne',
+      'manyToOne',
       'api::directory.directory'
     >;
     createdAt: Attribute.DateTime;

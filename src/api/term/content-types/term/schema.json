@@ -38,9 +38,9 @@
     },
     "directory": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::directory.directory",
-      "inversedBy": "term"
+      "inversedBy": "terms"
     }
   }
 }

@@ -20,9 +20,9 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "directories"
     },
-    "term": {
+    "terms": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::term.term",
       "mappedBy": "directory"
     }
